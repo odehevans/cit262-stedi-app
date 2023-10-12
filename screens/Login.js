@@ -8,6 +8,7 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
       const navigation = useNavigation();
 
       const [phoneNumber,setPhoneNumber] = React.useState("");
+      const [userName,setUserName] = React.useState("");
       const [oneTimePassword, setOneTimePassword] = React.useState("");
 
       // const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
@@ -30,12 +31,12 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
         : 'You have not saved a fingerprint or face'}
             </Text>            */}
               <TextInput 
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              value={userName}
+              onChangeText={setUserName}
               style={styles.input}
               backgroundColor='#e6f0d5'
               placeholderTextColor='#818181' 
-              placeholder='Cell Phone'>          
+              placeholder='Your Name e.g Evans'>          
                </TextInput>
 
             {/* <TouchableOpacity
@@ -57,8 +58,9 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
                style={styles.sendButton}
               onPress={async ()=>{
                 // console.log(phoneNumber+' Button was pressed')
-                console.log("Hello Evans")
-                Alert.alert("Hello Evans");
+                const myName = userName || "Evans";
+                console.log("Hello "+ myName)
+                Alert.alert("Hello "+ myName);
     
                 // const sendTextResponse=await fetch(
                 //   'https://dev.stedi.me/twofactorlogin/'+phoneNumber,
