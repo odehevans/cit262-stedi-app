@@ -8,6 +8,7 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
       const navigation = useNavigation();
 
       const [phoneNumber,setPhoneNumber] = React.useState("");
+      const [userName,setUserName] = React.useState("");
       const [oneTimePassword, setOneTimePassword] = React.useState("");
 
       // const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
@@ -30,12 +31,12 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
         : 'You have not saved a fingerprint or face'}
             </Text>            */}
               <TextInput 
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              value={userName}
+              onChangeText={setUserName}
               style={styles.input}
               backgroundColor='#e6f0d5'
               placeholderTextColor='#818181' 
-              placeholder='Cell Phone'>          
+              placeholder='Your Name e.g Evans'>          
                </TextInput>
 
             {/* <TouchableOpacity
@@ -56,23 +57,26 @@ const Login = ({loggedInState, loggedInStates,setLoggedInState})=>{
             <TouchableOpacity
                style={styles.sendButton}
               onPress={async ()=>{
-                console.log(phoneNumber+' Button was pressed')
+                // console.log(phoneNumber+' Button was pressed')
+                const myName = userName || "Evans";
+                console.log("Hello "+ myName)
+                Alert.alert("Hello "+ myName);
     
-                const sendTextResponse=await fetch(
-                  'https://dev.stedi.me/twofactorlogin/'+phoneNumber,
-                  {
-                    method:'POST',
-                    headers:{
-                     'content-type':'application/text'
-                   }
-                  }
-                )
-                const sendTextResponseData = await sendTextResponse.text();
-                if(sendTextResponse.status!=200){//invalid phone number, send them to the signup page
-                  await Alert.alert("Did you type your number correctly? "+phoneNumber);
-                } else{
-                  setLoggedInState(loggedInStates.LOGGING_IN);
-                }
+                // const sendTextResponse=await fetch(
+                //   'https://dev.stedi.me/twofactorlogin/'+phoneNumber,
+                //   {
+                //     method:'POST',
+                //     headers:{
+                //      'content-type':'application/text'
+                //    }
+                //   }
+                // )
+                // const sendTextResponseData = await sendTextResponse.text();
+                // if(sendTextResponse.status!=200){//invalid phone number, send them to the signup page
+                //   await Alert.alert("Did you type your number correctly? "+phoneNumber);
+                // } else{
+                //   setLoggedInState(loggedInStates.LOGGING_IN);
+                // }
               }}
             >
               <Text style={{color:'white'}}>Send</Text>      
